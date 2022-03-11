@@ -1,0 +1,62 @@
+
+# Forcefield configuration
+
+           parameters par_all27_prot_lipid_na.inp
+	 # parameters par_all36_prot.prm
+         # parameters par_all36_na.prm
+         # parameters par_all36_lipid.prm
+         # parameters par_all36_carb.prm
+           parameters toppar_water_ions_namd.str
+         # parameters par_all36_cgenff.prm
+         # parameters inhibitor.par
+
+# Initial State
+
+            structure structure.psf
+          coordinates structure.pdb
+          temperature 300.00 # K
+              boxSize    90.059000    72.381000    65.998000 # A
+
+# Output
+
+       trajectoryFile output.xtc
+     trajectoryPeriod 2500
+
+# Electrostatics 
+
+                  PME on
+               cutoff 9.00 # A
+            switching on
+       switchDistance 7.50 # A
+      implicitSolvent off
+
+# Temperature Control 
+
+           thermostat on
+ thermostatTemperature 300.00 # K
+    thermostatDamping 0.10 # /ps
+
+# Pressure Control 
+
+             barostat on
+     barostatPressure 1.0132 # bar
+  barostatAnisotropic off
+   barostatConstRatio off
+      barostatConstXY off
+
+# Integration
+
+             timeStep 4.00 # fs
+           slowPeriod 1.00 # fs
+
+# External forces
+
+
+# Restraints
+
+
+# Run Configuration
+
+              restart on
+             minimize 1000
+                  run 25000
