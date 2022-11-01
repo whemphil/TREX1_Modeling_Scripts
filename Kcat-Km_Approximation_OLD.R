@@ -8,21 +8,14 @@
 ## Environment
 
 rm(list=ls())
-#setwd('/path/to/file/')
-setwd('~/Desktop/')
+setwd('/path/to/file/')
 
 ## Master Parameters
 
-precision=1e6 # N/A, sample size per simulation
-loops=1e0 # N/A, number of simulations
-correlation='no' # is sampling data correlated
+precision=25 # N/A, sample size per simulation
+loops=1e5 # N/A, number of simulations
 S.1=15 # nM, low concentration of substrate
 S.2=515 # nM, high concentration of substrate
-#
-mean.1=1.9
-sd.1=0.45
-mean.2=13
-sd.2=1.8
 
 #### BEGIN SCRIPT
 
@@ -39,8 +32,8 @@ for (i in 1:loops){
   
   ## Define Parameters
   
-  CR.1=rgamma(precision,shape=(mean.1/sd.1)^2,rate = (mean.1/sd.1^2))
-  CR.2=rgamma(precision,shape=(mean.2/sd.2)^2,rate = (mean.2/sd.2^2))
+  CR.1=rnorm(precision,1.9,0.45)
+  CR.2=rnorm(precision,13,1.8)
   if (correlation=='yes'){
     CR.1=CR.1[order(CR.1)]
     CR.2=CR.2[order(CR.2)]
@@ -69,7 +62,6 @@ CE.sd=median(CE.sd)
 ## Save Calculations
 
 Results.WT_WT=list('Kcat.mean'=Kcat.mean,'Kcat.sd'=Kcat.sd,'Km.mean'=Km.mean,'Km.sd'=Km.sd,'CE.mean'=CE.mean,'CE.sd'=CE.sd)
-View(Results.WT_WT)
 rm(Kcat,Kcat.mean,Kcat.sd,Km,Km.mean,Km.sd,CR.1,CR.2,i,CE,CE.mean,CE.sd)
 
 ### Export Data
